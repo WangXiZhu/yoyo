@@ -1,0 +1,45 @@
+.left-arrow,.right-arrow{
+	border-width: 3px 0 0 3px;
+	border-style: solid;
+	border-color: #000;
+	width: 10px;
+	height: 10px;
+}
+
+.up-arrow,.down-arrow{
+	position: absolute;
+	z-index: 10;
+	font-size: 0;
+	height: 0px;
+	width: 0px;
+	line-height: 0;
+	border-width: 4px;
+}
+
+.up-arrow{
+	border-color: #c2c2c2 transparent transparent transparent;
+	border-style: solid dashed dashed dashed;
+}
+.down-arrow{
+	border-color:  transparent transparent #c2c2c2 transparent;
+	border-style:  dashed dashed solid dashed;
+}
+
+
+.left-arrow{
+	transform: rotate(-45deg);
+	-webkit-webkit-transform: rotate(-45deg);
+	-moz-webkit-transform: rotate(-45deg);
+	-ms-webkit-transform: rotate(-45deg);
+	-o-webkit-transform: rotate(-45deg);
+	webkit-transform: rotate(-45deg);
+}
+
+.right-arrow{
+	transform: rotate(135deg);
+	-webkit-webkit-transform: rotate(135deg);
+	-moz-webkit-transform: rotate(135deg);
+	-ms-webkit-transform: rotate(135deg);
+	-o-webkit-transform: rotate(135deg);
+	webkit-transform: rotate(135deg);
+}
