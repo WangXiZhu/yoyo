@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.fan::shadow .icon-fan-left{
+			-webkit-transform: rotate(120deg);
+		}
+
+		.fan::shadow .icon-fan-right{
+			-webkit-transform: rotate(-120deg);
+		}
+
+		.fan::shadow .icon-fan-left,.fan::shadow .icon-fan-right,.fan::shadow .icon-fan-mid{
+			border-radius: 50%;
+			border-width: 50px 25px;
+			border-style: solid;
+			border-color: transparent  transparent #000  transparent;
+			height: 0px;
+			width: 0px;
+			line-height: 0;
+			position: absolute;
+			margin-left: 15px;
+		}
+	</style>
+</head>
+<body>
+
+
+	<div class="fan"></div>
+
+	<template id="fan-template">
+		<div class="icon-fan">
+			<div class="icon-fan-mid"></div>
+			<div class="icon-fan-right"></div>
+			<div class="icon-fan-left"></div> 
+			<content></content>
+		</div>	
+	</template>
+	<script>
+		var host = document.querySelector('.fan');
+		var root = host.createShadowRoot();
+
+		var template = document.querySelector('#fan-template');
+		var clone = document.importNode(template.content,true);
+		root.appendChild(clone);
+	</script>
+</body>
+</html>
