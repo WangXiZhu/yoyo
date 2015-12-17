@@ -1,0 +1,279 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+
+		body{
+			margin: 0 auto;
+		}
+		.fan{
+			width: 86.7px;
+			height: 86.7px;
+			margin: 20px;
+			animation-name: zcrotate;
+			animation-delay: 0s;
+			animation-direction: normal;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+
+		.icon-fan-left{
+			transform: rotate(120deg) translateZ(0);
+		}
+
+		.icon-fan-right{
+			transform: rotate(-120deg) translateZ(0);
+		}
+
+		.icon-fan-left,.icon-fan-right,.icon-fan-mid{
+			border-radius: 50%;
+			border-width: 50px 25px;
+			border-style: solid;
+			height: 0px;
+			width: 0px;
+			line-height: 0;
+			position: absolute;
+			margin-left: 18px;
+			margin-top: -8px;
+		}
+		
+
+		@-webkit-keyframes zcrotate{
+			from{
+				-webkit-transform: rotate(0deg);
+				-ms-transform: rotate(0deg);
+				-o-transform: rotate(0deg);
+				transform: rotate(0deg);
+			}
+			to{
+				-webkit-transform: rotate(360deg);
+				-ms-transform: rotate(360deg);
+				-o-transform: rotate(360deg);
+				transform: rotate(360deg);
+			}
+		}
+		
+		@-moz-keyframes zcrotate{
+			from{
+				-moz-transform: rotate(0deg) translateZ(0);
+				transform: rotate(0deg) translateZ(0);
+			}
+			to{
+				-moz-transform: rotate(360deg) translateZ(0);
+				transform: rotate(360deg) translateZ(0);
+			}
+		}
+
+		input[type='button']{
+			display: inline-block;
+			line-height: 32px;
+			width: 60px;
+			height: 32px;
+			border: 1px solid transparent;
+			background: -moz-linear-gradient(top,#b8c4cb,#f6f6f8);
+			background: -webkit-linear-gradient(top, #fff, #0000ff); 
+			margin-top: 20px;
+		}
+
+		.zc{
+			background: red;
+			width: 100px;
+			height: 100px;
+			margin-top: 200px;
+			animation: 9.5s linear 0s normal none infinite zcrotate;
+			-webkit-animation:9.5s linear 0s normal none infinite zcrotate;
+		}
+
+		#info{
+			color: blue;
+			font-size: 42px;
+
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="fan">
+			<div class="icon-fan-left trangle fan-leaf"></div> 
+			<div class="icon-fan-mid trangle fan-leaf"></div>
+			<div class="icon-fan-right trangle fan-leaf"></div>
+	</div>
+	<div class="method">
+		<input type="button" value="开始" id="start">
+		<input type="button" value="加速" id="addSpeed"/>
+		<input type="button" value="减速" id="reduceSpeed">
+		<input type="button" value="摇起来" id="swing">
+		<input type="button" value="变身" id="transform">
+		<input type="button" value="马甲" id="clothes">
+		<input type="button" value="闪一下" id="bing">
+		<input type="button" value="闪累了" id='stopbing'>
+		<input type="button" value="结束" id="end"><br>	
+	</div>
+
+	<div id="info"></div>
+	<template id="fan-template">
+		<div class="icon-fan">
+			<div class="icon-fan-mid"></div>
+			<div class="icon-fan-right"></div>
+			<div class="icon-fan-left"></div> 
+			<content></content>
+		</div>	
+	</template>
+	
+
+	<script>
+		var host = document.querySelector('.fan');
+		var root = host.createShadowRoot();
+
+		var template = document.querySelector('#fan-template');
+		var clone = document.importNode(template.content,true);
+		root.appendChild(clone);
+	</script>	
+	<script>
+
+	/**
+	 * 设置旋转项
+	 * 只有firefox支持
+	 * @type {[type]}
+	 */
+	(function(){
+		var addSpeed = $('#addSpeed'),
+		reduceSpeed = $('#reduceSpeed'),
+		start = $("#start"),
+		end = $('#end'),
+		swing = $('#swing'),
+		transform = $('#transform'),
+		bing = $('#bing'),
+		stopbing = $('#stopbing'),
+		clothes = $('#clothes'),
+		fan = $('.fan');
+		
+		/**
+		 * 绑定事件
+		 * @type {Fan}
+		 */
+		var newfan = new Fan(fan),id,method = $('.method');
+		newfan.default();
+		
+		method.addEventListener('click',function(event){
+			var target_id = event.target.id;
+			newfan[target_id]();
+		},false);
+
+		
+		/**
+		 * 封装对象
+		 * @zchub
+		 * @DateTime 2015-12-15T13:40:37+0800
+		 * @param    {[type]}                 obj [description]
+		 */
+		
+		function Fan(obj){
+			this.color = '#fff';
+
+			this.default = function(){
+				$('#info').innerHTML = '';
+
+				$('.icon-fan-mid').style.borderColor = 'transparent transparent #000 transparent';
+				$('.icon-fan-left').style.borderColor = 'transparent transparent #000 transparent';
+				$('.icon-fan-right').style.borderColor = 'transparent transparent #000 transparent';
+			};
+
+
+			this.start=function(){
+				this.default();
+				obj.style.animationDuration = '0.9s';
+			};
+			this.end = function(){
+				this.default();
+				obj.style.animationDuration = '0s';
+			};
+			this.swing =  function(){
+				this.default();
+				obj.style.animationDuration = '0.1s';
+			};
+			this.transform =  function(){
+				var fan_color = [$('.icon-fan-mid'),$('.icon-fan-left'),$('.icon-fan-right')];
+
+				for(var color in fan_color){
+					var borderColor = fan_color[color].style.borderColor;
+				
+					var start_index = borderColor.indexOf('rgb'),end_index = borderColor.indexOf(")")+1,
+						border = borderColor.split(' '),
+					 	border_top = border[0]=='transparent'?'transparent':borderColor.substring(start_index,end_index);
+
+						
+					border_bottom = borderColor.substring(start_index,end_index);
+					border[0] = (border_top == 'transparent'? border_bottom : 'transparent');
+					fan_color[color].style.borderColor = border.join(' ');
+				}
+
+			};
+
+			this.addSpeed = function(){
+				var duration =obj.style.animationDuration,
+					currentSpeed = Number(duration.substring(0,duration.length-1));
+				if (currentSpeed>0.2) {
+					currentSpeed -= 0.2;
+				}else if(currentSpeed == 0){
+					$('#info').innerHTML = '还没开机呢！！';
+				}else{
+					$('#info').innerHTML = '根本停不下来！！';
+				};
+				fan.style.animationDuration = currentSpeed+'s';
+			};
+
+			this.reduceSpeed = function(){
+				this.default();
+				var duration =obj.style.animationDuration,
+					currentSpeed = Number(duration.substring(0,duration.length-1));
+				if (currentSpeed>0&&currentSpeed<10) {
+					currentSpeed += 0.4;
+				}else if(currentSpeed == 0){
+					$('#info').innerHTML = '还没开机呢！！';
+				}else if(currentSpeed>=5){
+					$('#info').innerHTML = '敢不敢再慢点！！';
+				};
+				fan.style.animationDuration = currentSpeed+'s';
+			};
+
+			this.clothes = function(){
+				var nums = [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'];
+				
+				var color='#';
+				for(var i=0;i<6;i++){
+					var num = Math.round(Math.random()*16);
+					color +=  nums[num];
+				}
+				var color_fan = getClassName('trangle'),	
+					currentColor = color_fan[0].style.borderColor;
+				 	start_index = currentColor.indexOf('rgb'),end_index = currentColor.indexOf(")")+1,
+					targetColor = currentColor.replace(currentColor.substring(start_index,end_index),color);
+
+				for (var i = color_fan.length - 1; i >= 0; i--) {
+					color_fan[i].style.borderColor = targetColor;
+				};
+			};
+
+			this.bing = function(){
+				id = setInterval((function(){newfan.clothes()}),1000);
+			};
+
+			this.stopbing = function(){
+				window.clearInterval(id);
+			}
+		}
+
+		function $(typeName){
+			return document.querySelector(typeName);
+		}
+
+		function getClassName(cls){
+			// return document.querySelectorAll(cls);
+			return document.getElementsByClassName(cls);
+		}
+	})();
+	</script>
+</body>
+</html>
