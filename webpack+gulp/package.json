@@ -1,0 +1,33 @@
+{
+  "name": "node-module",
+  "version": "1.0.0",
+  "private": false,
+  "dependencies": {
+    "gulp": "latest",
+    "webpack": "latest",
+    "live-reload": "latest",
+    "stylus": "latest",
+    "stream-combiner2": "latest",
+    "gulp-uglify" : "latest",
+    "browser-sync": "latest",
+    "gulp-less" : "latest",
+    "gulp-sourcemaps": "latest",
+    "gulp-notify": "latest",
+    "gulp-plumber": "latest",
+    "gulp-imagemin": "latest",
+    "imagemin-pngquant": "latest",
+    "gulp-cache" : "latest",
+    "browserify" : "latest"
+  },
+  "devDependencies": {
+
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
