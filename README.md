@@ -1,6 +1,5 @@
-[TOC] zc
+## yoyo
 
-# yoyo
 总结经常使用的css，js代码
 
 ###webpack+gulp
@@ -31,7 +30,9 @@ npm判断该文件下的dependencies参数，并通过npm install , npm update �
 方便查找文件
 
 * gulp-notify ,gulp-plumber
-
+html5_draggable
+README.md
+svg-icon
 当发生异常时提示错误 
 
 * stream-combiner2

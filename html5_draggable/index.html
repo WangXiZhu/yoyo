@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+	 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style>
+		body{
+			margin: 20px;
+			padding: 0;
+		}
+	 	#left{
+			width: 300px;
+			border: 1px solid black;
+			height: 300px;
+		}
+		#drag{
+			width: 50px;
+			border: 1px solid red;
+			height: 50px;
+			position:relative;
+			top:0px;
+			left:0px;
+		}
+	</style>
+<body>
+	<div id="left" ondragover="dragover(event)" ondrop="drop(event)"></div>
+	<div id="drag" draggable="true" ondragstart="drag(event)" ></div>
+	<script>
+		
+		function dragover(ev) {
+			ev.preventDefault();		
+		}
+
+		function drag(ev){
+			ev.dataTransfer.setData("text",ev.target.id);
+		}
+
+		function drop(ev){
+			ev.preventDefault();
+			var data=ev.dataTransfer.getData("text");
+			var div = document.getElementById(data);
+			var posx = 0,posy=0;
+
+			//获取鼠标位置
+			if(ev.pageX||e.pageY){
+				posx = ev.pageX;
+				posy = ev.pageY;
+			}
+			if(ev.clientY||ev.clientX){
+				posx = ev.clientX + document.body.scrollLeft
+                + div.scrollLeft;
+ 
+           		 posy = ev.clientY + document.body.scrollTop
+                + div.scrollTop;
+			}
+			div.style.top=(posy-20)+'px';
+			div.style.left=(posx-20)+'px';
+			ev.target.appendChild(document.getElementById(data));
+		}
+		</script>
+	</body>
+</html>

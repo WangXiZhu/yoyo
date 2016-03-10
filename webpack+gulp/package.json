@@ -17,7 +17,12 @@
     "gulp-imagemin": "latest",
     "imagemin-pngquant": "latest",
     "gulp-cache" : "latest",
-    "browserify" : "latest"
+    "browserify" : "latest",
+    "gulp-livereload" : "latest",
+    "gulp-jshint" : "latest",
+    "gulp-clean": "latest",
+    "gulp-rename" : "latest"
+
   },
   "devDependencies": {
 
