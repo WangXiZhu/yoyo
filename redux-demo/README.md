@@ -42,3 +42,9 @@ action中其中 规定的type为执行的动作
 #### 使用
 
 	不能直接修改数据，而是通过 action
+	
+	
+#### 学习资源
+[https://camsong.github.io/redux-in-chinese/docs/basics/Reducers.html](https://camsong.github.io/redux-in-chinese/docs/basics/Reducers.html)
+
+[2](http://www.jianshu.com/p/3334467e4b32)
