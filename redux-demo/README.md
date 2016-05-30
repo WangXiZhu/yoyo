@@ -31,20 +31,60 @@ action中其中 规定的type为执行的动作
 
 其中需要把action通过dispatch传入
 
- reducer --> 指明应用如何更新 state
+
+---
+
+reducer --> 指明应用如何 <b>更新 state</b>
+
+( previousState , action) => newState
 
 
- 关于使用reducer的建议
+
+ 关于使用reducer的建议,需要保持纯净
 > 修改传入参数；
 > 执行有副作用的操作，如 API 请求和路由跳转；
 > 调用非纯函数，如 Date.now() 或 Math.random()。
+
+
 
 #### 使用
 
 	不能直接修改数据，而是通过 action
 	
+#### 注意
+
+1.不直接修改state，通过object.assign()创建副本来操作
+2.default下返回原来的state。类似一下代码
+
 	
+	function todo(state = initState,action ){ 
+		switch(action.Type){
+			case Add_todo: 
+				return Object.assign({},state,{
+					visibility: action.state
+				})
+			default:
+				return state;
+		}
+	} 
+
+#### store
+
+###### store作用
+* 保存state
+* getState 获取state
+* dispatch(action) 更新state
+* subscribe( listener ) 注册监听器
+
+而我们使用redux只有一个store,当有其他逻辑时使用reducer组合 
+
+创建store
+
+	import { createStore } from 'redux'
+	import todo from '/reducers'
+	let store = createStore(todo)
 #### 学习资源
 [https://camsong.github.io/redux-in-chinese/docs/basics/Reducers.html](https://camsong.github.io/redux-in-chinese/docs/basics/Reducers.html)
 
 [2](http://www.jianshu.com/p/3334467e4b32)
+	
