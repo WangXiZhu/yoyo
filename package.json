@@ -1,0 +1,59 @@
+{
+  "name": "yoyo",
+  "version": "1.0.0",
+  "title": "",
+  "description": "自我总结",
+  "homepage": "",
+  "keywords": [
+    "yoyo"
+  ],
+  "contributors": [
+    "ant"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wangxizhu/yoyo"
+  },
+  "bugs": {
+    "url": "https://github.com/wangxizhu/yoyo/issues"
+  },
+  "main": "",
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "cz-conventional-changelog": "^1.1.6"
+  },
+  "scripts": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json"
+    ],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/*"
+    ],
+    "modulePathIgnorePatterns": [
+      "/_site/"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "scriptPreprocessor": "<rootDir>/node_modules/webpack-babel-jest",
+    "testDirectoryName": "tests"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

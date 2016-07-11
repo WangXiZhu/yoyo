@@ -44,6 +44,11 @@ action中其中 规定的type为执行的动作
 	不能直接修改数据，而是通过 action
 	
 	
+#### 服务端渲染
+
+react 可以用于服务端渲染，但是只会返回一段字符串。这样只会显示在服务端，而不会产生交互
+
+
 #### 学习资源
 [https://camsong.github.io/redux-in-chinese/docs/basics/Reducers.html](https://camsong.github.io/redux-in-chinese/docs/basics/Reducers.html)
 
