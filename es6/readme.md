@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 * class
 
 
@@ -69,6 +69,58 @@
 
 对于不同的属性有对应的代理的方法名
 =======
+
+### Reflect
+
+反射，扩展新方法
+
+让Object的命令操作都变成函数行为
+	
+	delete obj[name]
+	Reflect.deleteProperty(obj,name)
+
+
+### set 与 map
+
+数据结构，提供更加方便的数据操作方式
+
+* set
+值不能重复，可以通过 Array.from()  将 set 转为  array
+
+添加值，不会类型转换。
+运用案例
+1.数组去重 
+ [...new Set(array)]
+
+* map
+键只能为字符串
 ### 单例模式
 
->>>>>>> 2fddedbd66dd77ff4f4431e07d906731bf81d8a1
+### Iterator 遍历器
+
+function next(){
+	return nIndex < array.length? array(nIndex) ? undefined
+}
+
+
+其中类似数组的对象调用 iterable 才能进行遍历 
+eg:
+	var iterable = {
+		0: 'zc'	
+		1:	'yoyo'
+		[Symbol.iterator]: Array.protoType[Symbol.iterator]
+	}
+同时  Symbol.iterator] 需要对应遍历器生成函数
+
+
+#### generator 函数
+
+异步编程，包含多种状态
+
+	function* demo(){
+		yield 'zc'
+		return 'yo'
+	}
+
+yield 是暂停 标记
+同时  内部的 返回结果 包含有 iterator，在每次返回结果后，结果的指针都会跳转到 .next() 后
